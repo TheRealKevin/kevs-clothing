@@ -1,0 +1,34 @@
+import CartItem from "../../Component/cart-item-component/cart-item-component";
+
+export const addItemToCart = (cartItems , cartItemToAdd) => {
+    const existingCartItem = cartItems.find(cartItem => cartItem.id === cartItemToAdd.id);
+    if(existingCartItem){
+        return cartItems.map(cartItem => 
+            cartItem.id === cartItemToAdd.id
+            ? {...cartItem,quantity : cartItem.quantity + 1}
+            : cartItem    
+        )
+    }
+
+    return [...cartItems,{...cartItemToAdd,quantity: 1}]
+} 
+
+export const decrementItemFromCart = (cartItems , cartItemToRemove) => {
+    const existingCartItem = cartItems.find(
+        cartItem => CartItem.id === cartItemToRemove.id
+    )
+
+    if(existingCartItem.quantity === 1){
+        return cartItems.filter(cartItem => cartItem.id !== CartItem.id)
+    }
+
+    return cartItems.map(
+        cartItem => 
+        cartItem.id === cartItemToRemove.id
+        ?
+        {...cartItem,quantity: CartItem.quantity-1}
+        :
+        cartItem
+    )
+
+}
